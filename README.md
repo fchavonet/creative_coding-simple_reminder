@@ -2,12 +2,6 @@
 
 # Web - Simple Reminder
 
-This project is a small web application for task management. The goal was to make it as simple and efficient as possible. Users can add tasks, check them off, change their order, and delete them. The application saves data in the local storage to prevent any loss of information.
-<br><br>
-As with many of my projects, the aim was to work from scratch without using any frameworks. Here, the focus was primarily on honing my JavaScript skills. Despite the final output being very minimalist, it aligns with my initial idea.
-<br><br>
-If this project piques your interest, feel free to use it at your discretion. Despite its simplicity, the code is designed to be clear and modifiable, offering the possibility of adding new features in the future while preserving its ease of use.
-
 ## 🔖 Table of contents
 
 <details>
@@ -31,7 +25,11 @@ If this project piques your interest, feel free to use it at your discretion. De
 
 ## 📝 <span id="description">Description</span>
 
-
+This project is a small web application for task management. The goal was to make it as simple and efficient as possible. Users can add tasks, check them off, change their order, and delete them. The application saves data in the local storage to prevent any loss of information.
+<br><br>
+As with many of my projects, the aim was to work from scratch without using any frameworks. Here, the focus was primarily on honing my JavaScript skills. Despite the final output being very minimalist, it aligns with my initial idea.
+<br><br>
+If this project piques your interest, feel free to use it at your discretion. Despite its simplicity, the code is designed to be clear and modifiable, offering the possibility of adding new features in the future while preserving its ease of use.
 
 ## 🔨 <span id="tech-stack">Tech stack</span>
 
