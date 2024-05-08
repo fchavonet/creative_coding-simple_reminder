@@ -54,3 +54,8 @@ main {
     justify-content: center;
     align-items: center;
 }
+
+/********** SIMPLE REMINDER **********/
+ul li.checked {
+    text-decoration: line-through;
+}
