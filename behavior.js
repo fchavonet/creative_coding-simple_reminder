@@ -84,5 +84,14 @@ function loadReminders() {
 }
 
 
+// Event listener to add a reminder when the Enter key is pressed
+inputField.addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    addReminder();
+  }
+});
+
+
+
 // Load reminders from local storage when the page is loaded
 loadReminders();
