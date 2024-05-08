@@ -1,3 +1,26 @@
+/********** FONT IMPORT **********/
+@font-face {
+    font-family: "Roboto Thin";
+    src: url(./resources/fonts/roboto_thin.ttf);
+}
+
+@font-face {
+    font-family: "Roboto Regular";
+    src: url(./resources/fonts/roboto_regular.ttf);
+}
+
+@font-face {
+    font-family: "Roboto Black";
+    src: url(./resources/fonts/roboto_black.ttf);
+}
+
+/********** VARIABLES **********/
+:root {
+    --main-color: rgb(220, 20, 60);
+    --subline-color: rgb(198, 18, 54);
+    --background-color: rgb(240, 240, 240);
+}
+
 /********** RESET CSS **********/
 *,
 *::before,
@@ -8,4 +31,26 @@
     text-decoration: none;
     list-style: none;
     scroll-behavior: smooth;
+}
+
+/********** SCROLLBAR **********/
+::-webkit-scrollbar {
+    width: 12.5px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 25px;
+    background-color: var(--main-color);
+}
+
+/********** GENERAL **********/
+body {
+    font-family: "Roboto Regular", sans-serif;
+}
+
+main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
