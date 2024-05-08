@@ -17,7 +17,7 @@
 /********** VARIABLES **********/
 :root {
     --main-color: rgb(220, 20, 60);
-    --subline-color: rgb(198, 18, 54);
+    --subline-color: rgb(193, 31, 109);
     --background-color: rgb(240, 240, 240);
 }
 
@@ -33,19 +33,10 @@
     scroll-behavior: smooth;
 }
 
-/********** SCROLLBAR **********/
-::-webkit-scrollbar {
-    width: 12.5px;
-}
-
-::-webkit-scrollbar-thumb {
-    border-radius: 25px;
-    background-color: var(--main-color);
-}
-
 /********** GENERAL **********/
 body {
     font-family: "Roboto Regular", sans-serif;
+    background-image: radial-gradient(circle, #dc143c, #d80d4a, #d20e57, #ca1662, #c11f6d);
 }
 
 main {
@@ -55,7 +46,139 @@ main {
     align-items: center;
 }
 
+#holberton_seahorse {
+    height: 25px;
+    margin-right: 12.5px;
+}
+
+h2 {
+    display: flex;
+    align-items: center;
+    font-family: "Roboto Black", sans-serif;
+    margin-bottom: 25px;
+}
+
 /********** SIMPLE REMINDER **********/
+#simple_reminder_container {
+    width: 540px;
+    margin: 50px;
+    padding: 25px;
+    border-radius: 25px;
+    background-color: white;
+    box-shadow: 0 2.5px 8px rgba(0, 0, 0, 0.25);
+}
+
+#input_container {
+    height: 50px;
+    padding-left: 12.5px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 25px;
+    background-color: var(--background-color);
+}
+
+#input_container input {
+    padding: 12.5px;
+    flex: 1;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+#input_container button {
+    width: 50px;
+    height: 50px;
+    font-family: "Roboto Black", sans-serif;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    outline: none;
+    background-color: var(--main-color);
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+#input_container button:hover {
+    background-color: var(--subline-color);
+}
+
+#input_container button:active {
+    transform: scale(0.75);
+}
+
+ul {
+    padding-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 12.5px;
+    border-bottom: 1px dashed black;
+}
+
+ul li {
+    position: relative;
+    height: 25px;
+    padding-left: 50px;
+    padding-right: 37.5px;
+    display: flex;
+    align-items: center;
+    user-select: none;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+ul li::before {
+    position: absolute;
+    top: 0;
+    left: 12.5px;
+    width: 25px;
+    height: 25px;
+    content: "";
+    border: 2.5px solid var(--main-color);
+    border-radius: 50%;
+}
+
 ul li.checked {
     text-decoration: line-through;
+}
+
+ul li.checked::before {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    content: "\2713";
+    color: white;
+    border: none;
+    background-color: var(--main-color);
+}
+
+ul li p {
+    padding-right: 12.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+ul li span {
+    position: absolute;
+    top: 0;
+    right: 12.5px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 50%;
+    background-color: var(--main-color);
+    transition: 0.25s ease;
+}
+
+ul li span:hover {
+    background-color: var(--subline-color);
+}
+
+ul li span:active {
+    transform: scale(0.75);
 }
