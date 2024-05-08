@@ -63,7 +63,7 @@ git clone https://github.com/fchavonet/web-simple_reminder.git
 
 2. Open the folder in your favorite IDE.
 
-To test this little web application, visit <a href="https://fchavonet.github.io/web-basic_landing_page_template/">the Simple Reminder online</a>.
+To test this little web application, visit <a href="https://fchavonet.github.io/web-simple_reminder/">the Simple Reminder online</a>.
 
 <p align="center">
 <img src="./resources/images/screenshots.png" alt="Screenshots">
