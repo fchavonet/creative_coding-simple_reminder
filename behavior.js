@@ -5,6 +5,10 @@
 const inputField = document.getElementById("input_field");
 const remindersContainer = document.getElementById("reminders_container");
 
+// Variable to keep track of the element being dragged
+let draggingElement = null;
+
+
 // Function to create a new reminder element
 function createReminderElement(text, checked = false) {
   // Create a new list item element and set its HTML content
@@ -24,6 +28,67 @@ function createReminderElement(text, checked = false) {
 
 // Function to add event listeners to a reminder element
 function addEventListenersToReminder(reminder) {
+  // Enable the reminder to be draggable
+  reminder.draggable = true;
+
+  // Event listener to handle the start of a drag operation
+  reminder.addEventListener("dragstart", function (event) {
+    // Store the reference to the dragging element
+    draggingElement = event.target;
+
+    // Set data to be transferred during drag-and-drop operation
+    event.dataTransfer.setData("text/plain", "");
+
+    // Add a CSS class to indicate that the element is being dragged
+    setTimeout(() => {
+      event.target.classList.add("dragging");
+    }, 0);
+  });
+
+  // Event listener to handle the end of a drag operation
+  reminder.addEventListener("dragend", function (event) {
+    // Reset the dragging element reference
+    draggingElement = null;
+
+    // Remove CSS classes related to dragging
+    event.target.classList.remove("dragging");
+    event.target.classList.remove("highlighted");
+
+    // Save the current state of reminders
+    savedReminders();
+  });
+
+  // Event listener to handle drag-over events on the reminder
+  reminder.addEventListener("dragover", function (event) {
+    // Prevent the default drag-over behavior
+    event.preventDefault();
+
+    // Find the target list item element being dragged over
+    const targetElement = event.target.closest("li");
+
+    if (!targetElement) {
+      return;
+    }
+
+    // Get the vertical position of the cursor relative to the target element
+    const bounding = targetElement.getBoundingClientRect();
+    const offset = bounding.y + bounding.height / 2;
+
+    // Determine if the cursor is above or below the center of the target element
+    const isAfter = event.clientY > offset;
+
+    // Reorder the reminders based on the cursor position
+    const draggingElement = document.querySelector(".dragging");
+
+    if (isAfter) {
+      remindersContainer.insertBefore(draggingElement, targetElement.nextElementSibling);
+    } else {
+      remindersContainer.insertBefore(draggingElement, targetElement);
+    }
+
+    // Add a CSS class to highlight the drop position
+    draggingElement.classList.add("highlighted");
+  });
 
   // Event listener to handle the click on the delete button
   reminder.querySelector("span").addEventListener("click", function () {

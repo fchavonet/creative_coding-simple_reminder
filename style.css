@@ -182,3 +182,8 @@ ul li span:hover {
 ul li span:active {
     transform: scale(0.75);
 }
+
+/********** BEHAVIOR ELEMENTS **********/
+.highlighted {
+    background-color: var(--background-color);
+}
