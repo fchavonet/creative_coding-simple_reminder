@@ -21,6 +21,7 @@ function createReminderElement(text, checked = false) {
   return li;
 }
 
+
 // Function to add event listeners to a reminder element
 function addEventListenersToReminder(reminder) {
 
@@ -28,6 +29,9 @@ function addEventListenersToReminder(reminder) {
   reminder.querySelector("span").addEventListener("click", function () {
     // Remove the reminder from the DOM
     reminder.remove();
+
+    // Save the current state of reminders
+    savedReminders();
   });
 
   // Event listener to handle the click on the reminder itself
@@ -35,14 +39,50 @@ function addEventListenersToReminder(reminder) {
     // Toggle the checked state of the reminder when clicking on it
     if (event.target.tagName === "LI" || event.target.tagName === "P") {
       reminder.classList.toggle("checked");
+
+      // Save the current state of reminders
+      savedReminders();
     }
   });
 }
+
 
 // Function to add a new reminder
 function addReminder() {
   const inputValue = inputField.value.trim();
   const li = createReminderElement(inputValue);
   remindersContainer.appendChild(li);
+
+  // Save the current state of reminders
+  savedReminders();
+
+  // Clear the input field after adding the reminder
   inputField.value = "";
 }
+
+
+// Function to save the current state of reminders to local storage
+function savedReminders() {
+  localStorage.setItem("reminders", remindersContainer.innerHTML);
+}
+
+
+// Function to load reminders from local storage
+function loadReminders() {
+  // Retrieve saved reminders from local storage
+  const savedReminders = localStorage.getItem("reminders");
+
+  // If there are saved reminders, populate the reminders container with them
+  if (savedReminders) {
+    remindersContainer.innerHTML = savedReminders;
+
+    // Add event listeners to each loaded reminder
+    remindersContainer.querySelectorAll("li").forEach(li => {
+      addEventListenersToReminder(li);
+    });
+  }
+}
+
+
+// Load reminders from local storage when the page is loaded
+loadReminders();
