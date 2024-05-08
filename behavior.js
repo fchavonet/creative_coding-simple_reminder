@@ -7,6 +7,8 @@ const remindersContainer = document.getElementById("reminders_container");
 
 // Variable to keep track of the element being dragged
 let draggingElement = null;
+// Variable to store the reference to the current alert
+let currentAlert = null;
 
 
 // Function to create a new reminder element
@@ -115,9 +117,30 @@ function addEventListenersToReminder(reminder) {
 // Function to add a new reminder
 function addReminder() {
   const inputValue = inputField.value.trim();
-  const li = createReminderElement(inputValue);
-  remindersContainer.appendChild(li);
 
+  // If the input value is empty, show an alert and return
+  if (inputValue === "") {
+    showAlert("You must write something!");
+    return;
+  }
+
+  // Check if the input value contains only valid characters
+  const validInput = /^[a-zA-ZÀ-ÿ\s\d\.,'":!?()/-]*$/.test(inputValue);
+
+  // If the input value contains invalid characters, show an alert and clear the input field
+  if (!validInput) {
+    showAlert("This character is not allowed!");
+
+    // Clear the input field
+    inputField.value = "";
+    return;
+  }
+
+
+  // Create a new reminder element with the input value
+  const li = createReminderElement(inputValue);
+  // Append the reminder to the reminders container
+  remindersContainer.appendChild(li);
   // Save the current state of reminders
   savedReminders();
 
@@ -149,10 +172,48 @@ function loadReminders() {
 }
 
 
+// Function to show a custom alert message
+function showAlert(message) {
+  // If an alert is already displayed, remove it
+  if (currentAlert) {
+    currentAlert.remove();
+    currentAlert = null;
+  }
+
+  // Create a new alert element
+  const alertElement = document.createElement("div");
+  alertElement.classList.add("alert");
+  alertElement.textContent = message;
+
+  // Append the alert to the body
+  document.body.appendChild(alertElement);
+
+  // Remove the alert after a certain delay
+  const delay = message === "clear" ? 500 : 3000;
+  setTimeout(() => {
+    alertElement.remove();
+
+    // Reset the reference to the current alert
+    if (alertElement === currentAlert) {
+      currentAlert = null;
+    }
+  }, delay);
+
+  // Update the reference to the current alert
+  currentAlert = alertElement;
+}
+
+
 // Event listener to add a reminder when the Enter key is pressed
 inputField.addEventListener("keypress", function (event) {
   if (event.key === "Enter") {
     addReminder();
+  } else {
+    // If an alert is displayed, remove it
+    if (currentAlert) {
+      currentAlert.remove();
+      currentAlert = null;
+    }
   }
 });
 
