@@ -1,9 +1,94 @@
-/*jshint esversion: 6 */
+/*********************
+* RESPONSIVE WARNING *
+*********************/
+
+const responsiveWarning = document.getElementById("responsive-warning");
+// "true" if the site is optimized for responsive design, "false" if not.
+const responsiveDesign = false;
+
+// Show mobile warning if the user is on mobile and responsive-design is false.
+if (!responsiveDesign && window.innerWidth <= 768) {
+  responsiveWarning.classList.add("show");
+}
 
 
-// Get the reference to the input field and reminders container
-const inputField = document.getElementById("input_field");
-const remindersContainer = document.getElementById("reminders_container");
+/***********************
+* MODE TOGGLE BEHAVIOR *
+***********************/
+
+// Get elements that change with the mode.
+const toggleModeBtn = document.getElementById("toggle-mode-btn");
+const portfolioLink = document.getElementById("portfolio-link");
+const body = document.body;
+const allUls = document.querySelectorAll("ul");
+const simpleRemindercContainer = document.getElementById("simple-reminder-container");
+const remindersContainer = document.getElementById("reminders-container");
+const inputContainer = document.getElementById("input-container");
+const inputField = document.getElementById("input-field");
+
+
+// Function to apply mode.
+function applyMode(mode) {
+  body.classList.remove("light-mode", "dark-mode");
+  body.classList.add(mode);
+
+  if (mode === "dark-mode") {
+    // Set dark mode styles.
+    toggleModeBtn.innerHTML = '<i class="bi bi-sun-fill"></i>';
+
+    allUls.forEach(ul => {
+      ul.style.borderColor = "rgb(245, 245, 245)";
+    });
+
+    simpleRemindercContainer.style.backgroundColor = "rgb(2, 4, 8)";
+    inputContainer.style.backgroundColor = "rgb(30, 30, 30)";
+    inputField.style.color = "rgb(245, 245, 245)";
+
+    responsiveWarning.style.backgroundColor = "rgb(2, 4, 8)";
+  } else {
+    // Set light mode styles.
+    toggleModeBtn.innerHTML = '<i class="bi bi-moon-stars-fill"></i>';
+
+    allUls.forEach(ul => {
+      ul.style.borderColor = "rgb(2, 4, 8)";
+    });
+
+    simpleRemindercContainer.style.backgroundColor = "rgb(245, 245, 245)";
+    inputContainer.style.backgroundColor = "rgb(240, 240, 240)";
+    inputField.style.color = "rgb(2, 4, 8)";
+
+    responsiveWarning.style.backgroundColor = "rgb(245, 245, 245)";
+  }
+}
+
+// Check and apply saved mode on page load
+let savedMode = localStorage.getItem("mode");
+
+if (savedMode === null) {
+  savedMode = "light-mode"; // Default mode.
+}
+applyMode(savedMode);
+
+// Toggle mode and save preference.
+toggleModeBtn.addEventListener("click", function () {
+  let newMode;
+
+  if (body.classList.contains("light-mode")) {
+    newMode = "dark-mode";
+  } else {
+    newMode = "light-mode";
+  }
+
+  applyMode(newMode);
+
+  // Save choice.
+  localStorage.setItem("mode", newMode);
+});
+
+
+/******************
+* SIMPLE REMINDER *
+******************/
 
 // Variable to keep track of the element being dragged
 let draggingElement = null;
@@ -36,7 +121,7 @@ function addEventListenersToReminder(reminder) {
   // Event listener to handle the start of a drag operation
   reminder.addEventListener("dragstart", function (event) {
     // Store the reference to the dragging element
-    draggingElement = event.target;
+    draggingElement = event.currentTarget;
 
     // Set data to be transferred during drag-and-drop operation
     event.dataTransfer.setData("text/plain", "");
@@ -48,16 +133,16 @@ function addEventListenersToReminder(reminder) {
   });
 
   // Event listener to handle the end of a drag operation
-  reminder.addEventListener("dragend", function (event) {
-    // Reset the dragging element reference
-    draggingElement = null;
+  reminder.addEventListener("dragend", function () {
+    if (draggingElement) {
+      draggingElement.classList.remove("dragging");
+      draggingElement.classList.remove("highlighted");
+      draggingElement.style.backgroundColor = "";
+      draggingElement = null;
 
-    // Remove CSS classes related to dragging
-    event.target.classList.remove("dragging");
-    event.target.classList.remove("highlighted");
-
-    // Save the current state of reminders
-    savedReminders();
+      // Save the current state of reminders
+      savedReminders();
+    };
   });
 
   // Event listener to handle drag-over events on the reminder
@@ -88,8 +173,16 @@ function addEventListenersToReminder(reminder) {
       remindersContainer.insertBefore(draggingElement, targetElement);
     }
 
+    const mode = localStorage.getItem("mode") || "light-mode";
+
     // Add a CSS class to highlight the drop position
     draggingElement.classList.add("highlighted");
+
+    if (mode === "dark-mode") {
+      draggingElement.style.backgroundColor = "rgb(30, 30, 30)";
+    } else {
+      draggingElement.style.backgroundColor = "rgb(240, 240, 240)";
+    }
   });
 
   // Event listener to handle the click on the delete button

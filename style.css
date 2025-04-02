@@ -1,27 +1,20 @@
-/********** FONT IMPORT **********/
+/* FONT IMPORT */
 @font-face {
     font-family: "Roboto Thin";
-    src: url(./resources/fonts/roboto_thin.ttf);
+    src: url(./assets/fonts/roboto_thin.ttf);
 }
 
 @font-face {
     font-family: "Roboto Regular";
-    src: url(./resources/fonts/roboto_regular.ttf);
+    src: url(./assets/fonts/roboto_regular.ttf);
 }
 
 @font-face {
     font-family: "Roboto Black";
-    src: url(./resources/fonts/roboto_black.ttf);
+    src: url(./assets/fonts/roboto_black.ttf);
 }
 
-/********** VARIABLES **********/
-:root {
-    --main-color: rgb(220, 20, 60);
-    --subline-color: rgb(193, 31, 109);
-    --background-color: rgb(240, 240, 240);
-}
-
-/********** RESET CSS **********/
+/* RESET CSS */
 *,
 *::before,
 *::after {
@@ -33,44 +26,136 @@
     scroll-behavior: smooth;
 }
 
-/********** GENERAL **********/
+/* VARIABLES */
+:root {
+    --dark-color: rgb(2, 4, 8);
+    --dark-hover: rgba(255, 255, 255, 0.1);
+
+    --light-color: rgb(245, 245, 245);
+    --light-hover: rgba(0, 0, 0, 0.1);
+
+    --main-color: rgb(220, 20, 60);
+    --subline-color: rgb(193, 31, 109);
+}
+
+/* GENERAL */
+::-webkit-scrollbar {
+    display: none;
+}
+
 body {
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
     font-family: "Roboto Regular", sans-serif;
     font-size: 1em;
     background-image: radial-gradient(circle, #dc143c, #d80d4a, #d20e57, #ca1662, #c11f6d);
 }
 
-main {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+body.light-mode {
+    color: var(--dark-color);
 }
 
-#holberton_seahorse {
-    height: 25px;
-    margin-right: 12.5px;
+body.dark-mode {
+    color: var(--light-color);
+}
+
+a {
+    text-decoration: none;
+    color: var(--light-color);
 }
 
 h2 {
-    padding-left: 25px;
+    margin-bottom: 25px;
+    padding-left: 20px;
     display: flex;
     align-items: center;
     font-family: "Roboto Black", sans-serif;
-    margin-bottom: 25px;
 }
 
-/********** SIMPLE REMINDER **********/
-#simple_reminder_container {
+/* MAIN */
+#toggle-mode-btn {
+    width: 2rem;
+    height: 2rem;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    color: var(--light-color);
+    border: none;
+    border-radius: 0.5rem;
+    background-color: transparent;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+#toggle-mode-btn:hover {
+    background-color: var(--dark-hover);
+}
+
+#portfolio-link {
+    padding-right: 0.5rem;
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+}
+
+#github-link {
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+}
+
+/* RESPONSIVE WARNING */
+#responsive-warning {
+    width: 100%;
+    height: 100%;
+    padding: 2rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    text-align: center;
+    z-index: 9999;
+}
+
+.warning-icons {
+    font-size: 2rem;
+    color: orange;
+}
+
+@media (max-width: 768px) {
+    #responsive-warning.show {
+        display: flex;
+    }
+}
+
+/* SIMPLE REMINDER */
+#simple-reminder-container {
     width: 540px;
     margin: 50px;
     padding: 25px;
     border-radius: 25px;
-    background-color: white;
     box-shadow: 0 2.5px 8px rgba(0, 0, 0, 0.25);
 }
 
-#input_container {
+#holberton-seahorse {
+    height: 25px;
+    margin-right: 12.5px;
+}
+
+#input-container {
     height: 50px;
     padding-left: 12.5px;
     margin-bottom: 25px;
@@ -78,10 +163,9 @@ h2 {
     justify-content: space-between;
     align-items: center;
     border-radius: 25px;
-    background-color: var(--background-color);
 }
 
-#input_container input {
+#input-container input {
     padding: 12.5px;
     flex: 1;
     border: none;
@@ -89,7 +173,7 @@ h2 {
     background-color: transparent;
 }
 
-#input_container button {
+#input-container button {
     width: 50px;
     height: 50px;
     font-family: "Roboto Black", sans-serif;
@@ -102,11 +186,11 @@ h2 {
     transition: 0.25s ease;
 }
 
-#input_container button:hover {
+#input-container button:hover {
     background-color: var(--subline-color);
 }
 
-#input_container button:active {
+#input-container button:active {
     transform: scale(0.75);
 }
 
@@ -186,10 +270,6 @@ ul li span:active {
 }
 
 /********** BEHAVIOR ELEMENTS **********/
-.highlighted {
-    background-color: var(--background-color);
-}
-
 .alert {
     position: fixed;
     top: 0;
