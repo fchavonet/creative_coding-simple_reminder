@@ -75,10 +75,15 @@ git clone https://github.com/fchavonet/web-simple_reminder.git
 **How to use:**
 
 1. Open the `index.html` file in your web browser.
+
 2. Type a reminder into the input field.
+
 3. Press `Enter` or click the "+" button to add it.
+
 4. Click on a reminder to mark it as done (it will be crossed out).
+
 5. Drag and drop reminders to reorder them.
+
 6. Click the "X" button to delete a reminder.
 
 You can also test the web application online by clicking [here](https://fchavonet.github.io/web-simple_reminder/).
