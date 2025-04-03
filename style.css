@@ -70,10 +70,11 @@ a {
 
 h2 {
     margin-bottom: 25px;
-    padding-left: 20px;
+    padding-left: 17.5px;
     display: flex;
     align-items: center;
     font-family: "Roboto Black", sans-serif;
+    font-weight: 500;
 }
 
 /* MAIN */
