@@ -106,6 +106,8 @@ h2 {
     position: fixed;
     right: 1rem;
     bottom: 1rem;
+    font-family: monospace, sans-serif;
+    font-size: 0.75rem;
 }
 
 #github-link {
