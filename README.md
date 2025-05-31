@@ -105,4 +105,4 @@ You can also test the web application online by clicking [here](https://fchavone
 ## 👷 <span id="authors">Authors</span>
 
 **Fabien CHAVONET**
-- Github: [@fchavonet](https://github.com/fchavonet)
+- GitHub: [@fchavonet](https://github.com/fchavonet)
